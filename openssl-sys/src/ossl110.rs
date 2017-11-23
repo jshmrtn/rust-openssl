@@ -14,6 +14,7 @@ pub enum EVP_PKEY {}
 pub enum HMAC_CTX {}
 pub enum OPENSSL_STACK {}
 pub enum PKCS12 {}
+pub enum pkcs7 {}
 pub enum RSA {}
 pub enum SSL {}
 pub enum SSL_CTX {}
@@ -280,6 +281,14 @@ extern "C" {
         mac_iter: c_int,
         keytype: c_int,
     ) -> *mut PKCS12;
+
+    pub fn PKCS7_encrypt(
+        certs: *mut stack_st_X509,
+        in: *mut BIO, 
+        cipher: *mut EVP_CIPHER,
+        flags: c_int
+    ) -> *mut pkcs7;
+    
     pub fn X509_REQ_get_version(req: *const X509_REQ) -> c_long;
     pub fn X509_REQ_get_subject_name(req: *const X509_REQ) -> *mut ::X509_NAME;
 }

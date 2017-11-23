@@ -56,6 +56,7 @@ fn main() {
         .header("openssl/err.h")
         .header("openssl/rand.h")
         .header("openssl/pkcs12.h")
+        .header("openssl/pkcs7.h")
         .header("openssl/bn.h")
         .header("openssl/aes.h")
         .header("openssl/ocsp.h");
@@ -73,6 +74,9 @@ fn main() {
             format!("bio_info_cb*")
         } else if s == "_STACK" {
             format!("struct stack_st")
+        // This logic should really be cleaned up
+        } else if s == "PKCS7" {
+            format!("struct pkcs7")
         // This logic should really be cleaned up
         } else if is_struct && s != "point_conversion_form_t" &&
                    s.chars().next().unwrap().is_lowercase()

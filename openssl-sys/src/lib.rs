@@ -64,6 +64,7 @@ pub enum BN_MONT_CTX {}
 pub enum BN_BLINDING {}
 pub enum DSA_METHOD {}
 pub enum EVP_PKEY_ASN1_METHOD {}
+pub enum pkcs7 {}
 
 pub type bio_info_cb = Option<
     unsafe extern "C" fn(*mut BIO,
@@ -2650,6 +2651,15 @@ extern "C" {
         ca: *mut *mut stack_st_X509,
     ) -> c_int;
     pub fn PKCS12_free(p12: *mut PKCS12);
+
+    pub fn PKCS7_encrypt(
+        certs: *mut stack_st_X509,
+        b: *mut BIO,
+        cipher: *mut EVP_CIPHER,
+        flags: c_int,
+    ) -> *mut pkcs7;
+
+    pub fn pkcs7_free(cms: *mut pkcs7);
 
     pub fn GENERAL_NAME_free(name: *mut GENERAL_NAME);
 

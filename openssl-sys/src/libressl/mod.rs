@@ -339,6 +339,7 @@ pub struct X509_REQ {
 
 pub enum X509_VERIFY_PARAM_ID {}
 pub enum PKCS12 {}
+pub enum pkcs7 {}
 
 pub const SSL_CTRL_GET_SESSION_REUSED: c_int = 8;
 pub const SSL_CTRL_OPTIONS: c_int = 32;
@@ -505,6 +506,13 @@ extern "C" {
         mac_iter: c_int,
         keytype: c_int,
     ) -> *mut PKCS12;
+
+    pub fn PKCS7_encrypt(
+        certs: *mut stack_st_X509,
+        in: *mut ::BIO, 
+        cipher: *mut EVP_CIPHER,
+        flags: c_int
+    ) -> *mut pkcs7;
 
     pub fn SSL_library_init() -> c_int;
     pub fn SSL_load_error_strings();
